@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║          تمبلت صفحة روابط المدرس (Link in Bio) — ثابت            ║
+  ╠══════════════════════════════════════════════════════════════════╣
+  ║  لأي مدرس جديد:                                                  ║
+  ║   1) انسخ الفولدر كله                                            ║
+  ║   2) غيّر الأماكن المكتوب عليها "🟢 هنا" (فيه 6 أماكن بس)        ║
+  ║   3) حط صورة المدرس في نفس الفولدر باسم photo.jpg                ║
+  ║   4) ارفع الفولدر على الإنترنت (الشرح في الرسالة)               ║
+  ║                                                                  ║
+  ║  ⚠️ ما تلمسش أي حاجة تحت الخط اللي مكتوب عليه "لا تعدّل"         ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- 🟢 هنا (1): عنوان التبويب اللي بيظهر في المتصفح وعند مشاركة الرابط -->
+<title>Eng:Mahmoud Abdelhady| Linkes</title>
+
+<!-- 🟢 هنا (2): وصف الصفحة اللي بيظهر عند مشاركة الرابط على واتساب وفيسبوك -->
+<meta name="description" content="شرح برمجة أولي وتانية ثانوي - اعرف موعدك القادم">
+<meta property="og:title" content="Eng:Mahmoud Abdelhady| Linkes">
+<meta property="og:description" content="شرح برمجة أولي وتانية ثانوي - اعرف موعدك القادم">
+<!--
+  صورة المعاينة عند مشاركة الرابط (اختياري).
+  بعد ما ترفع الموقع وتاخد الرابط، فك التعليق من السطر اللي تحت
+  وحط رابط موقعك الحقيقي بدل mr-ahmed.netlify.app
+-->
+<!-- <meta property="og:image" content="https://mr-ahmed.netlify.app/photo.jpg"> -->
+
+<style>
+  /* ═══════════ 🟢 هنا (3): الألوان — غيّرها لتناسب المدرس ═══════════ */
+  :root{
+    --bg:#0a1722;      /* لون خلفية الصفحة (كحلي غامق) */
+    --ink:#f4f7fa;     /* لون الكتابة (أبيض) */
+    --muted:#9fb0bf;   /* لون الوصف (رمادي فاتح) */
+    --line:#e8eef3;    /* لون حدود الأزرار */
+    --accent:#1fbf8f;  /* اللون المميز: زرار الواتساب + دايرة الحرف */
+    --accent-ink:#06231a; /* لون الكتابة فوق اللون المميز */
+  }
+
+  /* ═══════════ لا تعدّل: من هنا لحد نهاية الـ CSS ═══════════ */
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#161616}
+  body{
+    font-family:"Segoe UI",Tahoma,"Noto Naskh Arabic",system-ui,sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;justify-content:center;
+  }
+  main{
+    width:100%;max-width:560px;min-height:100vh;
+    background:var(--bg);
+    padding:48px 20px 40px;
+    text-align:center;
+  }
+  /* الدايرة اللي فيها صورة المدرس */
+  .avatar{
+    width:112px;height:112px;border-radius:50%;
+    margin:0 auto 18px;overflow:hidden;
+    background:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    font-size:44px;font-weight:700;color:var(--accent-ink);
+  }
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  h1{margin:0 0 8px;font-size:1.5rem;font-weight:800}
+  .bio{margin:0 auto 30px;max-width:420px;color:var(--muted);line-height:1.7;font-size:1rem}
+  ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+  a.btn{
+    display:block;padding:20px 16px;
+    border:1.5px solid var(--line);border-radius:999px;
+    color:var(--ink);text-decoration:none;
+    font-size:1.05rem;font-weight:700;
+    transition:background .15s,color .15s;
+  }
+  a.btn:hover{background:var(--ink);color:var(--bg)}
+  a.btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+  /* زرار الواتساب المميز (الأخضر) */
+  a.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  a.btn.primary:hover{filter:brightness(1.15)}
+  footer{margin-top:34px;color:var(--muted);font-size:.85rem}
+  @media (prefers-reduced-motion:reduce){a.btn{transition:none}}
+</style>
+</head>
+
+<body>
+<!-- ═══════════ لا تعدّل: هيكل الصفحة (الجافاسكريبت بيملاه تلقائي) ═══════════ -->
+<main>
+  <div class="avatar" id="avatar"></div>  <!-- مكان صورة المدرس -->
+  <h1 id="name"></h1>                     <!-- مكان الاسم -->
+  <p class="bio" id="bio"></p>            <!-- مكان الوصف -->
+  <ul id="links"></ul>                    <!-- مكان الأزرار -->
+  <footer id="foot"></footer>             <!-- مكان النص السفلي -->
+</main>
+
+<!-- ╔═══════════════════════════════════════════════════════════════╗
+     ║   🟢 هنا (4): بيانات المدرس — ده المكان الأهم، غيّر منه بس     ║
+     ╚═══════════════════════════════════════════════════════════════╝ -->
+<script>
+const PROFILE = {
+
+  // 🟢 اسم المدرس (بيظهر كعنوان كبير تحت الصورة)
+  name: "Eng:Mahmoud Abdelhady",
+
+  // 🟢 الوصف تحت الاسم (جملة أو اتنين: المادة + المرحلة + دعوة للحجز)
+  bio: `👷‍♂️الصفحة الرسمية للمهندس/محمود عبدالهادي
+
+👨‍🎓خريج كلية الذكاء الاصطناعي قسم هندسة النظم الذكيه والروبوتات
+
+💻مدرس مادة البرمجة للصف الأول والثاني الثانوي
+
+💻Owner of Abdelhady Center لتعليم البرمجة من الصفر لجميع المراحل
+
+🌎روابطنا:⬇`,
+
+  // 🟢 صورة المدرس:
+  // حط الصورة في نفس الفولدر اللي فيه index.html وسمّيها بالظبط: photo.jpg
+  // (لو صورتك png اكتب "photo.png" — مربعة ومقاس 400×400 أحسن حاجة)
+  photo: "photo.jpg",
+
+  // 🟢 حرف بيظهر جوه الدايرة لو الصورة مش موجودة أو لسه ماتحطتش
+  initial: "أ",
+
+  // 🟢 رقم واتساب الحجز — اكتبه زي ما بتكتبه عادي (بالصفر الأول)
+  // الكود هيحوله لرابط واتساب صحيح لوحده، متكتبش رابط
+  whatsappNumber: "01270908284",
+
+  // 🟢 الرسالة الجاهزة اللي بتظهر للطالب لما يدوس على زرار الواتساب
+  whatsappMessage: "عايز احجز حصة تجريبية",
+
+  // 🟢 اسم زرار الواتساب (الزرار الأخضر)
+  whatsappButtonTitle: "📲 اعرف موعدك القادم",
+
+  // 🟢 نص صغير أسفل الصفحة (سيبه فاضي "" لو مش عايز)
+  footer: ""
+};
+
+// 🟢 هنا (5): باقي الأزرار — كل سطر = زرار
+// title = الكلمة اللي بتظهر على الزرار
+// url   = الرابط اللي يفتح لما الطالب يدوس (انسخه من المنصة نفسها)
+// ⭐ لو مفيش لينك لمنصة معينة اتركه "" (فاضي) والزرار مش هيظهر، من غير ما تمسحه
+// ⭐ عايز زرار جديد؟ انسخ أي سطر والصقه تحته وغيّر الكلام
+// ⭐ الترتيب هنا = الترتيب اللي بيظهر في الصفحة
+const LINKS = [
+  { title: "قناة واتساب",      url: "https://whatsapp.com/channel/0029Vb92UKFKmCPHYwQbmU0Z" }, // 🟢 رابط قناة الواتساب (تاب Updates > قناتك > Share)
+  { title: "Facebook",         url: "https://www.facebook.com/profile.php?id=61594961938350" },         // 🟢 رابط صفحة الفيسبوك
+  { title: "Instagram",        url: "https://www.instagram.com/eng.ma_hmoudabdelhady/" },        // 🟢 رابط الإنستجرام
+  { title: "YouTube",          url: "https://youtube.com/@eng.mahmoudabdelhady-u7x?si=aJaU7emifX7vigaY" },         // 🟢 رابط قناة اليوتيوب
+  { title: "TikTok",           url: "https://www.tiktok.com/@eng.mahmoudabdelhady?is_from_webapp=1&sender_device=pc" },          // 🟢 رابط التيك توك
+  { title: "threads",         url: "https://www.threads.com/@eng.ma_hmoudabdelhady" },                                       // فاضي = مش هيظهر
+  { title: "LinkedIn",         url: "www.linkedin.com/in/eng-mahmoud-abdelhady-9b143643b" },                                       // فاضي = مش هيظهر
+  { title: "X (Twitter)",      url: "https://x.com/EngMahmoudA2" }                                        // فاضي = مش هيظهر{ title: "Threeds",         url: "" },                                       // فاضي = مش هيظهر
+
+];
+</script>
+
+<!-- ═══════════ لا تعدّل: من هنا لحد الآخر ده الكود اللي بيبني الصفحة ═══════════ -->
+<script>
+// اختصار لجلب عنصر من الصفحة بالـ id
+const $ = id => document.getElementById(id);
+
+// 1) العنوان والاسم والوصف والنص السفلي
+document.title = PROFILE.name + " | روابطي";
+$("name").textContent = PROFILE.name;
+$("bio").textContent = PROFILE.bio;
+$("foot").textContent = PROFILE.footer;
+
+// 2) الصورة: لو اتحملت تظهر، لو مش موجودة يظهر الحرف
+const avatar = $("avatar");
+const img = new Image();
+img.alt = PROFILE.name;
+img.onload  = () => { avatar.textContent = ""; avatar.appendChild(img); };
+img.onerror = () => { avatar.textContent = PROFILE.initial; };
+img.src = PROFILE.photo;
+
+// 3) تحويل رقم الواتساب لرابط: 01012345678 -> https://wa.me/201012345678
+function whatsappLink(number, message) {
+  let n = String(number).replace(/\D/g, "");   // شيل أي رموز أو مسافات
+  if (n.startsWith("00")) n = n.slice(2);      // 0020... -> 20...
+  if (n.startsWith("0"))  n = "20" + n.slice(1); // 010... -> 2010...
+  const text = message ? "?text=" + encodeURIComponent(message) : "";
+  return "https://wa.me/" + n + text;
+}
+
+// 4) تجميع الأزرار: الواتساب الأول (مميز) وبعده باقي الروابط اللي ليها لينك
+const buttons = [];
+if (PROFILE.whatsappNumber) {
+  buttons.push({
+    title: PROFILE.whatsappButtonTitle,
+    url: whatsappLink(PROFILE.whatsappNumber, PROFILE.whatsappMessage),
+    primary: true
+  });
+}
+LINKS.filter(l => l.url && l.url.trim() !== "").forEach(l => buttons.push(l));
+
+// 5) رسم الأزرار في الصفحة
+const list = $("links");
+buttons.forEach(b => {
+  const li = document.createElement("li");
+  const a = document.createElement("a");
+  a.className = "btn" + (b.primary ? " primary" : "");
+  a.href = b.url;
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.textContent = b.title;
+  li.appendChild(a);
+  list.appendChild(li);
+});
+</script>
+</body>
+</html>
